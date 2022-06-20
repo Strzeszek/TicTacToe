@@ -47,7 +47,6 @@ int minmax(const StanGry& game, int depth, int alpha, int beta, bool turn)
         StanGry Hypo(game.get_size());  //Skopiowanie stanu gry do rozpatrywania
         Hypo = game;                        //
 
-        bool przerwanie = false;
         for(int i = 0; i < Hypo.get_size(); i++)
         {
             for(int j = 0; j < Hypo.get_size(); j++)
@@ -61,10 +60,10 @@ int minmax(const StanGry& game, int depth, int alpha, int beta, bool turn)
 
                     Hypo.delete_mark(i, j);
 
-                    alpha = max(alpha, maxeval);
+                    alpha = max(alpha, eval);
                     if(beta <= alpha)
                     {
-                        return maxeval;
+                        break;
                     }
                 }
             }
@@ -79,7 +78,6 @@ int minmax(const StanGry& game, int depth, int alpha, int beta, bool turn)
         StanGry Hypo(game.get_size());  //Skopiowanie stanu gry do rozpatrywania
         Hypo = game;                        //
 
-        bool przerwanie = false;
         for(int i = 0; i < Hypo.get_size(); i++)
         {
             for(int j = 0; j < Hypo.get_size(); j++)
@@ -92,9 +90,9 @@ int minmax(const StanGry& game, int depth, int alpha, int beta, bool turn)
                     mineval = min(mineval, eval);
 
                     Hypo.delete_mark(i, j);
-                    beta = min(beta, mineval);
+                    beta = min(beta, eval);
                     if(beta <= alpha)
-                        return mineval;
+                        break;
                 }
             }
         }
